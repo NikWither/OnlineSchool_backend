@@ -14,26 +14,8 @@ class NotesController extends Controller
         return NotesResource::collection(Note::with('tags')->get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        return;
-    }
-
     public function show(Note $note)
     {
         return new NotesResource($note);
-    }
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
     }
 }
