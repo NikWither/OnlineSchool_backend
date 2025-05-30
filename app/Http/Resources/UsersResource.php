@@ -17,8 +17,8 @@ class UsersResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'homework' => $this->when($isRouteShow, HomeWorkResource::collection($this->homework)),
-            'isAdmin' => $this->is_admin,
+            // 'homework' => $this->when($isRouteShow, HomeWorkResource::collection($this->homework)),
+            // 'isAdmin' => $this->is_admin,
         ];
     }
 }

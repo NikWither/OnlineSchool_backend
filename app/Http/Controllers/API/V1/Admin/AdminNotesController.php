@@ -4,15 +4,14 @@ namespace App\Http\Controllers\API\V1\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Note;
 
-class NotesController extends Controller
+
+class AdminNotesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return Note::all();
     }
 
     /**
