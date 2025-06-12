@@ -19,7 +19,13 @@ class AdminNotesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|min:2'
+        ]);
+
+        $note = Note::create($data);
+
+        return $note;
     }
 
     /**
@@ -35,7 +41,15 @@ class AdminNotesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|min:2'
+        ]);
+
+        $note = Note::findOrFail($id);
+
+        $note->update($data);
+
+        return $note;
     }
 
     /**
@@ -43,6 +57,12 @@ class AdminNotesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $note = Note::findOrFail($id);
+
+        $note->delete();
+
+        return [
+            'message' => 'ok'
+        ];
     }
 }

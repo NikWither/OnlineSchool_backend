@@ -12,6 +12,7 @@ use App\Http\Controllers\API\V1\VariantsController;
 // Admin
 use App\Http\Controllers\API\V1\Admin\AdminHomeworkController;
 use App\Http\Controllers\API\V1\Admin\AdminNotesController;
+use App\Http\Controllers\API\V1\Admin\AdminTagsController;
 use App\Http\Controllers\API\V1\Admin\AdminUsersController;
 use App\Http\Controllers\API\V1\Admin\DashboardController;
 // Middleware
@@ -33,6 +34,8 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
         Route::apiResource('users', AdminUsersController::class);
         Route::apiResource('homeworks', AdminHomeworkController::class);
         Route::apiResource('notes', AdminNotesController::class);
+        Route::apiResource('tags', AdminTagsController::class);
+        
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
 });
