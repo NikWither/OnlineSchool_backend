@@ -4,18 +4,9 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Note;
-use Illuminate\Http\Request;
-use App\Http\Resources\NotesResource;
+use App\Http\Controllers\API\V1\BaseDocumentsUsersController;
 
-class NotesController extends Controller
+class NotesController extends BaseDocumentsUsersController
 {
-    public function index()
-    {
-        return NotesResource::collection(Note::with('tags')->get());
-    }
-
-    public function show(Note $note)
-    {
-        return new NotesResource($note);
-    }
+    protected $modelClass = Note::class; 
 }

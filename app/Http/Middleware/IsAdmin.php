@@ -10,13 +10,15 @@ class IsAdmin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->user()) {
-            return response()->json(['message' => 'Unauthenticated'], 401);
-        };
+        $user = $request->user();
 
-        if (!$request->user()->isAdmin()) {
+        if (!$user) {
+            return response()->json(['message' => 'Unauthenticated'], 401);
+        }
+
+        if (!$user->isAdmin()) {
             return response()->json(['message' => 'Forbidden'], 403);
-        };
+        }
         
         return $next($request);
     }
