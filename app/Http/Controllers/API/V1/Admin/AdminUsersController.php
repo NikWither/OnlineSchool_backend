@@ -8,12 +8,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 
-class UsersHomeworkController extends Controller
+class AdminUsersController extends Controller
 {
-    // контроллер для получения домашки для админа (по id юзера)
     public function index()
     {
-        $users = User::with('homework')->where('is_admin', false)->get();
+        $users = User::where('is_admin', false)->get();
 
         return UsersResource::collection($users);
     }
@@ -22,7 +21,7 @@ class UsersHomeworkController extends Controller
     */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

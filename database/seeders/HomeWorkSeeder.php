@@ -13,7 +13,7 @@ class HomeWorkSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('home_works')->insert([
+        DB::table('homeworks')->insert([
             [
                 'title' => 'Математика',
                 'homework' => 'Решить задачи на дроби с 12 по 18 номер',

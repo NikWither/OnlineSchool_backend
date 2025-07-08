@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             NotesSeeder::class, 
             NotesTagsSeeder::class,
             UserSeeder::class,
-            HomeWorkSeeder::class,
+            HomeworkSeeder::class,
             VariantsSeeder::class,
         ]);
 

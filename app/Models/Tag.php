@@ -8,6 +8,8 @@ use App\Models\Note;
 
 class Tag extends Model
 {
+    protected $fillable = ['title'];
+    
     public function notes():BelongsToMany
     {
         return $this->belongsToMany(Note::class, 'notes_tags');
