@@ -11,14 +11,13 @@ class UsersResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        $isRouteShow = str_contains(Route::currentRouteName(), 'usersInfo.show');
+        $isRouteShow = str_contains(Route::currentRouteName(), 'users.show');
 
         return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            // 'homework' => $this->when($isRouteShow, HomeWorkResource::collection($this->homework)),
-            // 'isAdmin' => $this->is_admin,
+            'homework' => $this->when($isRouteShow, HomeWorkResource::collection($this->homework)),
         ];
     }
 }

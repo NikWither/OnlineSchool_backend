@@ -8,8 +8,9 @@ use App\Models\Tag;
 
 class Note extends Model
 {
-    public function tags():BelongsToMany
-    {
-        return $this->belongsToMany(Tag::class, 'notes_tags');
-    }
+    protected $fillable = [
+        'title', 
+        'file_path', 
+        'original_name', 
+    ];
 }

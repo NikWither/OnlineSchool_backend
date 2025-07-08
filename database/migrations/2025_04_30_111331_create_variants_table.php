@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('file_name');
+            $table->string('file_path');
+            $table->string('original_name');
             $table->timestamps();
         });
     }

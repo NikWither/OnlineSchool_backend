@@ -16,35 +16,32 @@ class AdminUsersController extends Controller
 
         return UsersResource::collection($users);
     }
-    /**
-     * Store a newly created resource in storage.
-    */
+
+
     public function store(Request $request)
     {
         
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $usersInfo)
-    {   
-        return new UsersResource($usersInfo);
+    public function show(User $user)
+    {
+        return new UsersResource($user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        // $data = $request->validate([
+        //     ''
+        // ]);        
+        return;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return response()->json([
+            'message' => 'Пользователь удален'
+        ], 200);
     }
 }

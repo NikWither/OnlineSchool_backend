@@ -19,14 +19,12 @@ class DashboardController extends Controller
         $users = User::count();
         $notes = Note::count();
         $variants = Variant::count();
-        $tags = Tag::count();
         $courses = Course::count();
 
         return [
             "users"=> $users,
             "notes"=> $notes,
             "variants"=> $variants,
-            "tags"=> $tags,
             "courses"=> $courses
         ];
     }

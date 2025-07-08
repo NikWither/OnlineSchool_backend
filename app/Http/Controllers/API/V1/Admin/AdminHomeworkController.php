@@ -15,39 +15,46 @@ class AdminHomeworkController extends Controller
     // получение домашки заданного пользователя
     public function index(Request $request)
     {
+        $request->validate([
+            'user_id' => 'required|integer'
+        ]);
+        
         $user_id = $request->user_id;
         
-        $homeworks = Homework::where('user_id', $user_id)->get();
+        $homeworks = Homework::where('user_id', $user_id)
+            ->orderByDesc('created_at')
+            ->get();
 
         return HomeWorkResource::collection($homeworks)
             ->response()
             ->setStatusCode(200);
     }
 
+    public function show(Homework $homework)
+    {
+        return new HomeworkResource($homework)->response()->setStatusCode(200);
+    }
+
     public function store(StoreHomeworkRequest $request)
     {
-        $data = $request->validated();
-
-        $homework = Homework::create($data);
+        $homework = Homework::create($request->validated());
 
         return (new HomeWorkResource($homework))->response()->setStatusCode(201);
     }
 
-    public function update(UpdateHomeworkRequest $request, string $id)
+    public function update(UpdateHomeworkRequest $request, Homework $homework)
     {
-        $homework = Homework::findOrFail($id);
-
         $homework->update($request->validated());
 
         return (new HomeWorkResource($homework))->response()->setStatusCode(200);
     }
 
-    public function destroy(string $id)
+    public function destroy(Homework $homework)
     {
-        $homework = Homework::findOrFail($id);
-
         $homework->delete();
 
-        return response()->noContent();
+        return response()->json([
+            'message' => 'Домашнее задание удалено'
+        ], 200);
     }
 }

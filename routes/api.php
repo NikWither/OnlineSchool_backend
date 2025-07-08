@@ -1,6 +1,9 @@
 <?php
 
-
+use App\Http\Controllers\API\V1\Admin\AdminAssigmentController;
+use App\Http\Controllers\API\V1\Admin\AdminTasksController;
+use App\Http\Controllers\API\V1\Admin\AdminVariantsController;
+use App\Http\Controllers\API\V1\Admin\DocumentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // Controllers
@@ -17,11 +20,11 @@ use App\Http\Controllers\API\V1\Admin\AdminUsersController;
 use App\Http\Controllers\API\V1\Admin\DashboardController;
 // Middleware
 use App\Http\Middleware\IsAdmin;
-
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/admin', [AuthController::class, 'loginAdmin']);
+
 Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
     // auth users routes
     Route::apiResource('notes', NotesController::class);
@@ -33,9 +36,13 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
         
         Route::apiResource('users', AdminUsersController::class);
         Route::apiResource('homeworks', AdminHomeworkController::class);
+        Route::apiResource('assigments', AdminAssigmentController::class);
+
+        // files
         Route::apiResource('notes', AdminNotesController::class);
-        Route::apiResource('tags', AdminTagsController::class);
-        
+        Route::apiResource('variants', AdminVariantsController::class);
+        Route::apiResource('tasks', AdminTasksController::class);
+
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
 });
