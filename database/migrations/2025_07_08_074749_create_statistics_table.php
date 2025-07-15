@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('assigment_id')->constrained()->onDelete('cascade');
+            $table->foreignId('assignment_id')->constrained()->onDelete('cascade');
             $table->enum('status', ['не начали', 'в процессе', 'зачтено'])->default('не начали');
-            $table->unique(['user_id', 'task_id']); // один пользователь — одна статистика на одно задание
+            $table->unique(['user_id', 'assignment_id']); // один пользователь — одна статистика на одно задание
             $table->timestamps();
         });
     }

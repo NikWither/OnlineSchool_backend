@@ -5,14 +5,23 @@ namespace App\Http\Controllers\API\V1\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UsersResource;
 use App\Models\User;
+use App\Services\Admin\AdminUsersService;
 use Illuminate\Http\Request;
 
 
 class AdminUsersController extends Controller
 {
+    protected $service;
+
+    public function __construct(AdminUsersService $service)
+    {   
+        $this->service = $service;
+    }
+
+
     public function index()
     {
-        $users = User::where('is_admin', false)->get();
+        $users = $this->service->getAllUsers();
 
         return UsersResource::collection($users);
     }

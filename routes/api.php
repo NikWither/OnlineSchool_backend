@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\V1\Admin\AdminAssigmentController;
+use App\Http\Controllers\API\V1\Admin\AdminBidController;
+use App\Http\Controllers\API\V1\Admin\AdminStatisticController;
 use App\Http\Controllers\API\V1\Admin\AdminTasksController;
 use App\Http\Controllers\API\V1\Admin\AdminVariantsController;
 use App\Http\Controllers\API\V1\Admin\DocumentController;
@@ -23,7 +25,11 @@ use App\Http\Middleware\IsAdmin;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::post('/admin', [AuthController::class, 'loginAdmin']);
+// Route::post('/admin', [AuthController::class, 'loginAdmin']);
+Route::get('/statistics/{id}', [AdminStatisticController::class, 'show']);
+
+// заявка с формы homepage
+Route::post('/create-lead', [AdminBidController::class, 'store']);
 
 Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
     // auth users routes
@@ -42,6 +48,10 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
         Route::apiResource('notes', AdminNotesController::class);
         Route::apiResource('variants', AdminVariantsController::class);
         Route::apiResource('tasks', AdminTasksController::class);
+
+        // заявка
+        Route::get('/leads', [AdminBidController::class, 'index']);
+        // Route::delete('/bit', [AdminBidController::class, 'delete']);
 
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
