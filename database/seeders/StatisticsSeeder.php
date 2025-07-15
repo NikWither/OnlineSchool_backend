@@ -16,42 +16,42 @@ class StatisticsSeeder extends Seeder
         DB::table('statistics')->insert([
             [
                 'user_id' => 2,
-                'assigment_id' => 1,
+                'assignment_id' => 1,
                 'status' => 'зачтено',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'user_id' => 2,
-                'assigment_id' => 2,
+                'assignment_id' => 2,
                 'status' => 'в процессе',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'user_id' => 2,
-                'assigment_id' => 3,
+                'assignment_id' => 3,
                 'status' => 'не начали',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'user_id' => 3,
-                'assigment_id' => 1,
+                'assignment_id' => 1,
                 'status' => 'не начали',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
                     [
                 'user_id' => 3,
-                'assigment_id' => 2,
+                'assignment_id' => 2,
                 'status' => 'не начали',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'user_id' => 3,
-                'assigment_id' => 3,
+                'assignment_id' => 3,
                 'status' => 'в процессе',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -59,7 +59,7 @@ class StatisticsSeeder extends Seeder
 
             [
                 'user_id' => 3,
-                'assigment_id' => 4,
+                'assignment_id' => 4,
                 'status' => 'зачтено',
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Statistic;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,7 +21,7 @@ class DatabaseSeeder extends Seeder
             HomeworkSeeder::class,
             VariantsSeeder::class,
             AssigmentSeeder::class,
-            AssigmentSeeder::class,
+            StatisticsSeeder::class,
         ]);
 
         User::factory()->create([

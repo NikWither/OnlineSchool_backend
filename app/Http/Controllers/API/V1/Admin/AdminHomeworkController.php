@@ -8,22 +8,26 @@ use App\Http\Requests\Homework\UpdateHomeworkRequest;
 use App\Models\Homework;
 use App\Models\User;
 use App\Http\Resources\HomeWorkResource;
+use App\Services\Admin\AdminHomeworkService;
 use Illuminate\Http\Request;
 
 class AdminHomeworkController extends Controller
 {
+    protected $service;
+
+    public function __construct(AdminHomeworkService $service)
+    {
+        $this->service = $service;
+    }
+
     // получение домашки заданного пользователя
     public function index(Request $request)
     {
         $request->validate([
             'user_id' => 'required|integer'
         ]);
-        
-        $user_id = $request->user_id;
-        
-        $homeworks = Homework::where('user_id', $user_id)
-            ->orderByDesc('created_at')
-            ->get();
+
+        $homeworks = $this->service->getHomeworksUser($request->user_id);
 
         return HomeWorkResource::collection($homeworks)
             ->response()
