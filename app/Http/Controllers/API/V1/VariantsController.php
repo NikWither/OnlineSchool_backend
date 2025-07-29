@@ -3,11 +3,27 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Variant;
-use App\Http\Controllers\API\V1\BaseDocumentsUsersController;
+use App\Services\VariantService;
 
-class VariantsController extends BaseDocumentsUsersController
+class VariantsController extends Controller
 {
-    protected $modelClass = Variant::class; 
+    protected $service;
+    
+    public function __construct(VariantService $service)
+    {
+        $this->service = $service;
+    }
+
+    public function index()
+    {
+        return Variant::all();
+    }
+
+    public function show(int $id)
+    {
+        $document = $this->service->downloadDocument($id);
+
+        return response()->download($document->path, $document->name);
+    }
 }

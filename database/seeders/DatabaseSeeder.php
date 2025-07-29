@@ -22,6 +22,10 @@ class DatabaseSeeder extends Seeder
             VariantsSeeder::class,
             AssigmentSeeder::class,
             StatisticsSeeder::class,
+            LessonSeeder::class,
+            TimetableSeeder::class,
+            TestSeeder::class,
+            TestUserSeeder::class,
         ]);
 
         User::factory()->create([

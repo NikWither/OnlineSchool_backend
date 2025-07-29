@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Note;
-use App\Services\NoteService;
+use App\Models\Task;
+use App\Services\TaskService;
 
-class NotesController extends Controller
+class TasksController extends Controller
 {
     protected $service;
     
-    public function __construct(NoteService $service)
+    public function __construct(TaskService $service)
     {
         $this->service = $service;
     }
 
     public function index()
     {
-        return Note::all();
+        return Task::all();
     }
 
     public function show(int $id)
