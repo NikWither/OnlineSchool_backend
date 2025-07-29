@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Task;
+namespace App\Http\Requests\Timetable;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTaskRequest extends FormRequest
+class StoreTimetableRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,11 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'file' => 'required|file|mimes:pdf,doc,docx,zip|max:20480',
+            'user_id' => 'required|integer|exists:users,id',
+            'lesson_id' => 'required|integer|exists:lessons,id',
+            'day_of_week' => 'required|integer|between:0,7',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'nullable|date_format:H:i|after:start_time',
         ];
     }
 }

@@ -14,14 +14,18 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\API\V1\HomeWorkController;
 use App\Http\Controllers\API\V1\NotesController;
 use App\Http\Controllers\API\V1\VariantsController;
+use App\Http\Controllers\API\V1\TasksController;
+use App\Http\Controllers\API\V1\TimetableController;
 // Admin
 use App\Http\Controllers\API\V1\Admin\AdminHomeworkController;
 use App\Http\Controllers\API\V1\Admin\AdminNotesController;
-use App\Http\Controllers\API\V1\Admin\AdminTagsController;
+use App\Http\Controllers\API\V1\Admin\AdminTestAssigmentController;
+use App\Http\Controllers\API\V1\Admin\AdminTimetableController;
 use App\Http\Controllers\API\V1\Admin\AdminUsersController;
 use App\Http\Controllers\API\V1\Admin\DashboardController;
 // Middleware
 use App\Http\Middleware\IsAdmin;
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
@@ -35,7 +39,10 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
     // auth users routes
     Route::apiResource('notes', NotesController::class);
     Route::apiResource('variants', VariantsController::class);
+    Route::apiResource('tasks', TasksController::class);
     Route::apiResource('homeworks', HomeWorkController::class);
+    
+    Route::get('/timetable', [TimetableController::class, 'index']);
     
     // admin routes
     Route::prefix('admin')->middleware([IsAdmin::class])->group(function () {
@@ -52,6 +59,11 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
         // заявка
         Route::get('/leads', [AdminBidController::class, 'index']);
         // Route::delete('/bit', [AdminBidController::class, 'delete']);
+
+        // расписание 
+        Route::apiResource('timetable', AdminTimetableController::class);
+        // выдача тестов
+        Route::apiResource('test-assigment', AdminTestAssigmentController::class);
 
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });

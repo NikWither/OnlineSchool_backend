@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Task;
+namespace App\Http\Requests\TestAssigment;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTaskRequest extends FormRequest
+class UpdateTestAssigmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,9 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'file' => 'required|file|mimes:pdf,doc,docx,zip|max:20480',
+            'user_id' => 'required|integer|exists:users,id',
+            'test_id' => 'required|integer|exists:tests,id',
+            'status' => 'required|in:not_available,in_progress,passed,failed'
         ];
     }
 }
