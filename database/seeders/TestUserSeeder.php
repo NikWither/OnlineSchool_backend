@@ -13,7 +13,7 @@ class TestUserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('test_user')->insert([
+        DB::table('user_test')->insert([
             [
                 'user_id' => 2,
                 'test_id' => 1,

@@ -24,6 +24,7 @@ use App\Http\Controllers\API\V1\Admin\AdminTestAssigmentController;
 use App\Http\Controllers\API\V1\Admin\AdminTestsController;
 use App\Http\Controllers\API\V1\Admin\AdminTimetableController;
 use App\Http\Controllers\API\V1\Admin\AdminUsersController;
+use App\Http\Controllers\API\V1\Admin\AdminUserTestController;
 use App\Http\Controllers\API\V1\Admin\DashboardController;
 // Middleware
 use App\Http\Middleware\IsAdmin;
@@ -67,8 +68,7 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
         // расписание 
         Route::apiResource('timetable', AdminTimetableController::class);
         // выдача тестов
-        Route::apiResource('test-assigment', AdminTestAssigmentController::class);
-
+        Route::apiResource('user-test', AdminUserTestController::class);
         Route::get('/dashboard', [DashboardController::class, 'index']);
     });
 });
