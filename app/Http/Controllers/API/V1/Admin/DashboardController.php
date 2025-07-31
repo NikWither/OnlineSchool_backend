@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\API\V1\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Note;
 use App\Models\Variant;
 use App\Models\Course;
-use App\Models\Tag;
-
+use App\Models\Test;
+use App\Models\Book;
 
 class DashboardController extends Controller
 {
@@ -20,12 +19,16 @@ class DashboardController extends Controller
         $notes = Note::count();
         $variants = Variant::count();
         $courses = Course::count();
+        $tests = Test::count();
+        $books = Book::count();
 
         return [
             "users"=> $users,
             "notes"=> $notes,
             "variants"=> $variants,
-            "courses"=> $courses
+            "courses"=> $courses,
+            "tests" => $tests,
+            "books" => $books,
         ];
     }
 }
