@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\V1\Admin\AdminAssigmentController;
 use App\Http\Controllers\API\V1\Admin\AdminBidController;
+use App\Http\Controllers\API\V1\Admin\AdminBooksController;
 use App\Http\Controllers\API\V1\Admin\AdminStatisticController;
 use App\Http\Controllers\API\V1\Admin\AdminTasksController;
 use App\Http\Controllers\API\V1\Admin\AdminVariantsController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\API\V1\TimetableController;
 use App\Http\Controllers\API\V1\Admin\AdminHomeworkController;
 use App\Http\Controllers\API\V1\Admin\AdminNotesController;
 use App\Http\Controllers\API\V1\Admin\AdminTestAssigmentController;
+use App\Http\Controllers\API\V1\Admin\AdminTestsController;
 use App\Http\Controllers\API\V1\Admin\AdminTimetableController;
 use App\Http\Controllers\API\V1\Admin\AdminUsersController;
 use App\Http\Controllers\API\V1\Admin\DashboardController;
@@ -55,6 +57,8 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
         Route::apiResource('notes', AdminNotesController::class);
         Route::apiResource('variants', AdminVariantsController::class);
         Route::apiResource('tasks', AdminTasksController::class);
+        Route::apiResource('tests', AdminTestsController::class);
+        Route::apiResource('books', AdminBooksController::class);
 
         // заявка
         Route::get('/leads', [AdminBidController::class, 'index']);

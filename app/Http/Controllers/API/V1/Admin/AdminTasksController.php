@@ -8,7 +8,7 @@ use App\Models\Task;
 use App\Services\Admin\AdminTaskService;
 use Illuminate\Http\Request;
 
-class AdminTasksController
+class AdminTasksController extends Controller
 {
     protected $service;
 

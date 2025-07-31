@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API\V1\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Bid\StoreBidRequest;
 use App\Models\Bid;
-use Illuminate\Http\Request;
 
 class AdminBidController extends Controller
 {

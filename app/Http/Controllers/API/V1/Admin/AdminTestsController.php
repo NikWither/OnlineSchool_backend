@@ -4,29 +4,26 @@ namespace App\Http\Controllers\API\V1\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Variant\StoreVariantRequest;
-use App\Models\Variant;
-use App\Services\Admin\AdminVariantService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use App\Models\Test;
+use App\Services\Admin\AdminTestService;
 
-class AdminVariantsController extends Controller
+class AdminTestsController extends Controller
 {
     protected $service;
     
-    public function __construct(AdminVariantService $service)
+    public function __construct(AdminTestService $service)
     {
         $this->service = $service;
     }
 
     public function index()
     {
-        return Variant::all();
+        return Test::all();
     }
 
     public function store(StoreVariantRequest $request)
     {
-        $item = $this->service->createVariant($request);
+        $item = $this->service->createTest($request);
 
         return response()->json($item, 201);
     }
@@ -38,9 +35,9 @@ class AdminVariantsController extends Controller
         return response()->download($document->path, $document->name);
     }
 
-    public function destroy(Variant $variant)
+    public function destroy(Test $test)
     {
-        $variant->delete();
+        $test->delete();
 
         return response()->json([
             'message' => 'Файл удален'
