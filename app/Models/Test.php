@@ -11,6 +11,7 @@ class Test extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->withPivot('status');
+        return $this->belongsToMany(User::class)
+            ->withPivot('status');
     }
 }
