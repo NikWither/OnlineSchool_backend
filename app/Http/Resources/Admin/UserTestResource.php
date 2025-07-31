@@ -15,6 +15,7 @@ class UserTestResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'user' => $this->user->name,
             'test' => $this->test->title,
             'status' => $this->status,

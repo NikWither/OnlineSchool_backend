@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\TestAssigment;
 
+use App\DTOs\UserTestDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserTestRequest extends FormRequest
@@ -18,5 +19,10 @@ class UpdateUserTestRequest extends FormRequest
             'test_id' => 'required|integer|exists:tests,id',
             'status' => 'required|in:not_available,in_progress,passed,failed'
         ];
+    }
+
+    public function toDTO(): UserTestDTO
+    {
+        return UserTestDTO::fromArray($this->validated());
     }
 }

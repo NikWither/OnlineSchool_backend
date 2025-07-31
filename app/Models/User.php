@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Models\Homework;
 use App\Models\Test;
 use App\Models\Timetable;
+use App\Models\UserTest;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -56,5 +57,22 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Test::class)
             ->withPivot('status');
+    }
+
+    // Хуки
+
+    protected static function booted(): void
+    {
+        static::created(function (User $user) {
+            $tests = Test::all();
+
+            foreach ($tests as $test) {
+                UserTest::create([
+                    'user_id' => $user->id,
+                    'test_id' => $test->id,
+                    'status' => 'not_available'
+                ]);
+            }
+        });
     }
 }

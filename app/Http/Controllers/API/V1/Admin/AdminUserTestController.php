@@ -2,62 +2,61 @@
 
 namespace App\Http\Controllers\API\V1\Admin;
 
+use App\DTOs\UserTestDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TestAssigment\UpdateUserTestRequest;
 use App\Http\Requests\UserTest\StoreUserTestRequest;
 use App\Http\Resources\Admin\UserTestResource;
 use App\Models\UserTest;
+use App\Services\Admin\AdminUserTestService;
+
 class AdminUserTestController extends Controller
 {
-    public function index()
-    {
-        return UserTestResource::collection(
-            UserTest::with(['user:id,name', 'test:id,title'])->get()
-        );
-    }
+        protected $service;
 
-    public function store(StoreUserTestRequest $request)
-    {
-        $data = $request->validated();
+        public function __construct(AdminUserTestService $service)
+        {
+                $this->service = $service;
+        }
 
-        $userTest = UserTest::create($data);
+        public function index()
+        {
+                return UserTestResource::collection($this->service->index());
+        }
 
-        return response()->json([
-            'user_test' => $userTest, 
-        ], 201);
-    }
+        public function store(StoreUserTestRequest $request)
+        {                
+                $userTest = $this->service->create($request->toDTO());
 
-    public function show(string $id)
-    {
-        $userTests = UserTest::with('test:id,title')
-            ->where('user_id', $id)
-            ->get();
+                return response()->json([
+                        'user_test' => $userTest, 
+                ], 201);
+        }
 
-        return UserTestResource::collection($userTests);
-    }
+        public function show(string $id)
+        {                
+                return UserTestResource::collection(
+                        $this->service->show($id)
+                );
+        }
 
-    public function update(UpdateUserTestRequest $request, string $id)
-    {
-        $data = $request->validated();
+        public function update(UpdateUserTestRequest $request, string $id)
+        {
+                $userTest = $this->service->update((int) $id, $request->toDTO());
 
-        $userTest = UserTest::findOrFail($id);
-        
-        $userTest->update($data);
+                return response()->json([
+                        'user_test' => $userTest,
+                        'message' => 'Обновлён'
+                ], 202);
+        }
 
-        return response()->json([
-            'user_test' => $userTest,
-            'message' => 'Обновлён'
-        ], 202);
-    }
+        public function destroy(string $id)
+        {
+                $this->service->delete($id);
 
-    public function destroy(string $id)
-    {
-        $userTest = UserTest::findOrFail($id);
-
-        $userTest->delete();
-
-        return response()->json([
-            'message' => 'Запись удалена'
-        ]);
-    }
+                return response()->json([
+                        'message' => 'Запись удалена'
+                ]);
+        }
 }
+                                                                                                                                                                                                                                                        
