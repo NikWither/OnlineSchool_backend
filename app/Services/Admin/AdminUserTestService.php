@@ -29,14 +29,14 @@ class AdminUserTestService
             ->get();
     }
 
-    public function update(int $id, UserTestDTO $dto): UserTest
+    public function update(int $id, array $request): UserTest
     {
         $userTest = UserTest::findOrFail($id);
 
+        $status = $request['status'];
+
         $userTest->update([
-            'user_id' => $dto->user_id,
-            'test_id' => $dto->test_id,
-            'status' => $dto->status,
+            'status' => $status,
         ]);
 
         return $userTest;

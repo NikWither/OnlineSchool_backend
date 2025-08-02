@@ -20,12 +20,12 @@ use App\Http\Controllers\API\V1\TimetableController;
 // Admin
 use App\Http\Controllers\API\V1\Admin\AdminHomeworkController;
 use App\Http\Controllers\API\V1\Admin\AdminNotesController;
-use App\Http\Controllers\API\V1\Admin\AdminTestAssigmentController;
 use App\Http\Controllers\API\V1\Admin\AdminTestsController;
 use App\Http\Controllers\API\V1\Admin\AdminTimetableController;
 use App\Http\Controllers\API\V1\Admin\AdminUsersController;
 use App\Http\Controllers\API\V1\Admin\AdminUserTestController;
 use App\Http\Controllers\API\V1\Admin\DashboardController;
+use App\Http\Controllers\API\V1\UserTestController;
 // Middleware
 use App\Http\Middleware\IsAdmin;
 
@@ -46,6 +46,7 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('homeworks', HomeWorkController::class);
     
     Route::get('/timetable', [TimetableController::class, 'index']);
+    Route::get('/user-test', [UserTestController::class, 'index']);
     
     // admin routes
     Route::prefix('admin')->middleware([IsAdmin::class])->group(function () {

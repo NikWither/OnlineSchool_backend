@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\UserTest;
+namespace App\Http\Requests\Test;
 
-use App\DTOs\UserTestDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserTestRequest extends FormRequest
+class StoreTestRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,7 +14,8 @@ class UpdateUserTestRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required|in:not_available,in_progress,passed,failed'
+            'title' => 'required|string|max:255',
+            'file' => 'required|file|mimes:pdf,doc,docx,zip|max:20480',
         ];
     }
 }
