@@ -22,15 +22,15 @@ class UserTestService
 
     public function downloadDocument(int $id): DownloadableFileDTO
     {
-        $variant = Test::findOrFail($id);
+        $test = Test::findOrFail($id);
 
-        if (!$variant->file_path || !Storage::disk('public')->exists($variant->file_path)) {
+        if (!$test->file_path || !Storage::disk('public')->exists($test->file_path)) {
              throw new \Exception("Файл с id = $id не найден", 404);
         }
 
         return new DownloadableFileDTO(
-            Storage::disk('public')->path($variant->file_path),
-            $variant->original_name
+            Storage::disk('public')->path($test->file_path),
+            $test->original_name
         );
     }
 }

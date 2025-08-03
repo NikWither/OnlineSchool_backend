@@ -16,6 +16,8 @@ class UserTestResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'test_original_name' => $this->test->original_name, 
+            'test_id' => $this->test->id,
             'test' => $this->test->title,
             'status' => $this->status,
             'created_at' => $this->created_at?->format('d.m.Y'),

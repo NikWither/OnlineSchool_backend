@@ -29,15 +29,8 @@ class UserTestController extends Controller
 
     public function show($id)
     {
-        $test = Test::findOrFail($id);
+        $document = $this->service->downloadDocument($id);
 
-        if (!$test->file_path || !Storage::disk('public')->exists($test->file_path)) {
-             throw new \Exception("Файл с id = $id не найден", 404);
-        }
-        
-        return new DownloadableFileDTO(
-            Storage::disk('public')->path($test->file_path),
-            $test->original_name
-        );
+        return response()->download($document->path, $document->name);
     }
 }
