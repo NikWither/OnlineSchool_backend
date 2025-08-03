@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
             StatisticsSeeder::class,
             LessonSeeder::class,
             TimetableSeeder::class,
-            TestSeeder::class,
-            TestUserSeeder::class,
+            // TestSeeder::class,
+            // TestUserSeeder::class,
         ]);
 
         User::factory()->create([

@@ -3,32 +3,23 @@
 namespace App\Http\Controllers\API\V1\Admin;
 
 use App\Http\Controllers\Controller;
-
-use App\Models\User;
-use App\Models\Note;
-use App\Models\Variant;
-use App\Models\Course;
-use App\Models\Test;
-use App\Models\Book;
+use App\Services\Admin\AdminDashboardService;
 
 class DashboardController extends Controller
 {
+    protected $service;
+
+    public function __construct(AdminDashboardService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
-        $users = User::count();
-        $notes = Note::count();
-        $variants = Variant::count();
-        $courses = Course::count();
-        $tests = Test::count();
-        $books = Book::count();
-
+        $data = $this->service->index(); 
+        
         return [
-            "users"=> $users,
-            "notes"=> $notes,
-            "variants"=> $variants,
-            "courses"=> $courses,
-            "tests" => $tests,
-            "books" => $books,
+            'data' => $data,
         ];
     }
 }

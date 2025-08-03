@@ -20,19 +20,19 @@ use App\Http\Controllers\API\V1\TimetableController;
 // Admin
 use App\Http\Controllers\API\V1\Admin\AdminHomeworkController;
 use App\Http\Controllers\API\V1\Admin\AdminNotesController;
-use App\Http\Controllers\API\V1\Admin\AdminTestAssigmentController;
 use App\Http\Controllers\API\V1\Admin\AdminTestsController;
 use App\Http\Controllers\API\V1\Admin\AdminTimetableController;
 use App\Http\Controllers\API\V1\Admin\AdminUsersController;
 use App\Http\Controllers\API\V1\Admin\AdminUserTestController;
 use App\Http\Controllers\API\V1\Admin\DashboardController;
+use App\Http\Controllers\API\V1\BooksController;
+use App\Http\Controllers\API\V1\UserTestController;
 // Middleware
 use App\Http\Middleware\IsAdmin;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-// Route::post('/admin', [AuthController::class, 'loginAdmin']);
 Route::get('/statistics/{id}', [AdminStatisticController::class, 'show']);
 
 // заявка с формы homepage
@@ -43,10 +43,15 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('notes', NotesController::class);
     Route::apiResource('variants', VariantsController::class);
     Route::apiResource('tasks', TasksController::class);
+    Route::apiResource('books', BooksController::class);
+
+    // profile
     Route::apiResource('homeworks', HomeWorkController::class);
-    
     Route::get('/timetable', [TimetableController::class, 'index']);
+    Route::get('/user-test', [UserTestController::class, 'index']);
+    Route::get('/user-test/{id}', [UserTestController::class, 'show']);
     
+
     // admin routes
     Route::prefix('admin')->middleware([IsAdmin::class])->group(function () {
         
@@ -63,7 +68,6 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
 
         // заявка
         Route::get('/leads', [AdminBidController::class, 'index']);
-        // Route::delete('/bit', [AdminBidController::class, 'delete']);
 
         // расписание 
         Route::apiResource('timetable', AdminTimetableController::class);

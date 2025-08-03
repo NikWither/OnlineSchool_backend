@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\V1\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Variant\StoreVariantRequest;
+use App\Http\Requests\Test\StoreTestRequest;
 use App\Models\Test;
 use App\Services\Admin\AdminTestService;
 
@@ -21,7 +21,7 @@ class AdminTestsController extends Controller
         return Test::all();
     }
 
-    public function store(StoreVariantRequest $request)
+    public function store(StoreTestRequest $request)
     {
         $item = $this->service->createTest($request);
 

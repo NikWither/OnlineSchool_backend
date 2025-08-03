@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\V1\Admin;
 
 use App\DTOs\UserTestDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TestAssigment\UpdateUserTestRequest;
+use App\Http\Requests\UserTest\UpdateUserTestRequest;
 use App\Http\Requests\UserTest\StoreUserTestRequest;
 use App\Http\Resources\Admin\UserTestResource;
 use App\Models\UserTest;
@@ -42,7 +42,7 @@ class AdminUserTestController extends Controller
 
         public function update(UpdateUserTestRequest $request, string $id)
         {
-                $userTest = $this->service->update((int) $id, $request->toDTO());
+                $userTest = $this->service->update((int) $id, $request->validated());
 
                 return response()->json([
                         'user_test' => $userTest,

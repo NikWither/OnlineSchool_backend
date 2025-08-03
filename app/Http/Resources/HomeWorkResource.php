@@ -13,6 +13,7 @@ class HomeworkResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'homework' => $this->homework,
+            'date' => $this->created_at->format('d.m'),
         ];
     }
 }
