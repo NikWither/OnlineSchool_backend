@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('homeworks', function (Blueprint $table) {
             $table->id();
             $table->string("title")->nullable();
-            $table->text("homework")->default('Без Д/З');
+            $table->string('homework')->default('Без Д/З');
             $table->foreignId("user_id")->constrained()->onDelete('cascade');
             $table->timestamps();
         });
