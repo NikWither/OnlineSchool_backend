@@ -20,6 +20,7 @@ use App\Http\Controllers\API\V1\TimetableController;
 // Admin
 use App\Http\Controllers\API\V1\Admin\AdminHomeworkController;
 use App\Http\Controllers\API\V1\Admin\AdminNotesController;
+use App\Http\Controllers\API\V1\Admin\AdminStatisticsAssigmentsController;
 use App\Http\Controllers\API\V1\Admin\AdminTestsController;
 use App\Http\Controllers\API\V1\Admin\AdminTimetableController;
 use App\Http\Controllers\API\V1\Admin\AdminUsersController;
@@ -57,6 +58,7 @@ Route::prefix('v1')->middleware(['auth:sanctum'])->group(function () {
         
         Route::apiResource('users', AdminUsersController::class);
         Route::apiResource('homeworks', AdminHomeworkController::class);
+        // создание заданий для статистики
         Route::apiResource('assigments', AdminAssigmentController::class);
 
         // files

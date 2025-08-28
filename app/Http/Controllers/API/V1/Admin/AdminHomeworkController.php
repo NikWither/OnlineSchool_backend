@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Homework\StoreHomeworkRequest;
 use App\Http\Requests\Homework\UpdateHomeworkRequest;
 use App\Models\Homework;
-use App\Models\User;
-use App\Http\Resources\HomeWorkResource;
+use App\Http\Resources\HomeworkResource;
 use App\Services\Admin\AdminHomeworkService;
 use Illuminate\Http\Request;
+use OpenApi\Attributes as OA;
 
 class AdminHomeworkController extends Controller
 {
@@ -20,7 +20,25 @@ class AdminHomeworkController extends Controller
         $this->service = $service;
     }
 
-    // получение домашки заданного пользователя
+    #[OA\Get(
+        path: "/api/v1/admin/homeworks",
+        summary: "Получить список всех домашних заданий",
+        tags: ["Admin Homework"],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Список домашних заданий",
+                content: new OA\MediaType(
+                        mediaType: "application/json",
+                        schema: new OA\Schema(
+                            type: "array",
+                            items: new OA\Items(ref: "#/components/schemas/HomeworkResponse")
+                        )
+                    )
+                )
+            ]
+        )
+    ]
     public function index(Request $request)
     {
         $request->validate([
@@ -29,28 +47,27 @@ class AdminHomeworkController extends Controller
 
         $homeworks = $this->service->getHomeworksUser($request->user_id);
 
-        return HomeWorkResource::collection($homeworks)
-            ->response()
-            ->setStatusCode(200);
+        // Изменили return
+        return response()->json(HomeworkResource::collection($homeworks), 200);
     }
 
     public function show(Homework $homework)
     {
-        return new HomeworkResource($homework)->response()->setStatusCode(200);
+        return response()->json(new HomeworkResource($homework), 200);
     }
 
     public function store(StoreHomeworkRequest $request)
     {
         $homework = Homework::create($request->validated());
 
-        return (new HomeWorkResource($homework))->response()->setStatusCode(201);
+        return (new HomeworkResource($homework))->response()->setStatusCode(201);
     }
 
     public function update(UpdateHomeworkRequest $request, Homework $homework)
     {
         $homework->update($request->validated());
 
-        return (new HomeWorkResource($homework))->response()->setStatusCode(200);
+        return (new HomeworkResource($homework))->response()->setStatusCode(200);
     }
 
     public function destroy(Homework $homework)
