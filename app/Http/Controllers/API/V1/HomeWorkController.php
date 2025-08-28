@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Homework\StoreHomeworkRequest;
 use App\Http\Requests\Homework\UpdateHomeworkRequest;
-use App\Http\Resources\HomeWorkResource;
+use App\Http\Resources\HomeworkResource;
 use App\Models\Homework;
 use Illuminate\Http\Request;
 
@@ -17,6 +17,6 @@ class HomeWorkController extends Controller
         
         $query = Homework::where('user_id', $user_id);
         
-        return HomeWorkResource::collection($query->get());
+        return HomeworkResource::collection($query->get());
     }
 }

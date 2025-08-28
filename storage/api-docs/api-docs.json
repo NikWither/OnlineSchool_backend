@@ -1,0 +1,86 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "api version 1",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/admin/homeworks": {
+            "get": {
+                "tags": [
+                    "Admin Homework"
+                ],
+                "summary": "Получить список всех домашних заданий",
+                "operationId": "e8deee2a3888f12198595ccbea16970f",
+                "responses": {
+                    "200": {
+                        "description": "Список домашних заданий",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/HomeworkResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StoreHomeworkRequest": {
+                "required": [
+                    "title",
+                    "homework",
+                    "user_id"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Домашнее задание на вторник"
+                    },
+                    "homework": {
+                        "type": "string",
+                        "example": "Выучить второй замечательный закон"
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "example": 32
+                    }
+                },
+                "type": "object"
+            },
+            "HomeworkResponse": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 29
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Домашнее задание на вторник"
+                    },
+                    "homework": {
+                        "type": "string",
+                        "example": "Выучить второй замечательный закон"
+                    },
+                    "date": {
+                        "type": "string",
+                        "example": "23.09"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Admin Homework",
+            "description": "Admin Homework"
+        }
+    ]
+}

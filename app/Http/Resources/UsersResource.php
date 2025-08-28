@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Route;
-use App\Http\Resources\HomeWorkResource;
+use App\Http\Resources\HomeworkResource;
 
 class UsersResource extends JsonResource
 {
@@ -17,7 +17,7 @@ class UsersResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'homework' => $this->when($isRouteShow, HomeWorkResource::collection($this->homework)),
+            'homework' => $this->when($isRouteShow, HomeworkResource::collection($this->homework)),
         ];
     }
 }

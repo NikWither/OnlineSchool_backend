@@ -3,6 +3,18 @@
 namespace App\Http\Requests\Homework;
 
 use Illuminate\Foundation\Http\FormRequest;
+use OpenApi\Attributes as OA;
+
+#[OA\Schema(
+    schema: 'StoreHomeworkRequest',
+    required: ['title', 'homework', 'user_id'],
+    properties: [
+        new OA\Property(property: 'title', type: 'string', example: 'Домашнее задание на вторник'),
+        new OA\Property(property: 'homework', type: 'string', example: 'Выучить второй замечательный закон'),
+        new OA\Property(property: 'user_id', type: 'integer', example: 32)
+    ],
+    type: 'object'
+)]
 
 class StoreHomeworkRequest extends FormRequest
 {
